@@ -4,20 +4,20 @@ This project is meant to be a starting place for building a REST API. It uses an
 
 Only the google login strategy is currently implemented, although adding new strategies should be fairly easy. You will need to register your own application through the Google developer console and enable the Google+ API.
 
-For simplicity, this starter project uses the config/keys.js file to hold sensitive API key information. This file should never be committed to source control. In reality, you will likely store this information in environment variables.
+This starter project uses the config/keys.js file to hold sensitive API key information. If you store actual keys in this file it should never be committed to source control. In reality, you will likely store your keys in environment variables and then pull those environment variables into keys.js.
 
-Your keys.js file should have this structure:
+Your keys.js file should look like this:
 ```
 module.exports = {
     google: {
-        clientID: 'yourClientId',
-        clientSecret: 'yourClientSecret'
+        clientID: process.env.GOOGLE_CLIENT_ID || 'yourClientId',
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'yourClientSecret'
     },
     mongo: {
-        dbURI: 'yourMongoConnectionString'
+        dbURI: process.env.MONGO_DB_URI || 'yourMongoConnectionString'
     },
     session: {
-        cookieKey: 'yourCookieSessionSecret (you make it up)'
+        cookieKey: process.env.SESSION_COOKIE_SECRET || 'yourCookieSessionSecret (you make it up)'
     }
 }
 ```
